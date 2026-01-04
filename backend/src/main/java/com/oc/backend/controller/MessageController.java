@@ -17,6 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/messages")
 @SecurityRequirement(name = "bearerAuth")
+/**
+ * Contrôleur des messages.
+ *
+ * <p>Permet d'envoyer un message lié à une location et à un utilisateur.
+ * JWT obligatoire (voir {@code @SecurityRequirement}).
+ */
 public class MessageController {
   private final MessageService messageService;
 

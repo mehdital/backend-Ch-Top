@@ -26,6 +26,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
+/**
+ * Service métier des rentals.
+ *
+ * <p>Responsabilités :
+ * <ul>
+ *   <li>Lister et mapper les entités {@link Rental} vers des DTO de réponse</li>
+ *   <li>Créer / mettre à jour un rental, y compris la sauvegarde d'une photo sur disque</li>
+ *   <li>Construire l'URL publique de la photo via {@link com.oc.backend.config.WebConfig}</li>
+ * </ul>
+ */
 public class RentalService {
   private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
   private final RentalRepository rentalRepository;
@@ -77,6 +87,7 @@ public class RentalService {
     rental.setPrice(request.getPrice());
     rental.setDescription(request.getDescription());
     rental.setOwner(owner);
+    // Sauvegarde l'image sur disque puis stocke l'URL publique dans la colonne RENTALS.picture.
     rental.setPicture(storePicture(request.getPicture(), baseUrl));
     rentalRepository.save(rental);
     return new RentalResponse("Rental created !");
@@ -92,6 +103,7 @@ public class RentalService {
     rental.setDescription(request.getDescription());
 
     if (request.getPicture() != null && !request.getPicture().isEmpty()) {
+      // Si une nouvelle image est fournie, on la sauvegarde et on remplace l'URL existante.
       rental.setPicture(storePicture(request.getPicture(), baseUrl));
     }
 
@@ -119,13 +131,21 @@ public class RentalService {
     return value.toLocalDate().format(DATE_FORMAT);
   }
 
+  // Sauvegarde l'image uploadee sur disque et renvoie l'URL publique a stocker en base.
   private String storePicture(MultipartFile file, String baseUrl) {
     try {
+      // 1) Cree le dossier d'upload si besoin.
       Files.createDirectories(uploadDir);
+
+      // 2) Nettoie le nom original et ne garde que l'extension (si presente).
       String originalName = StringUtils.cleanPath(file.getOriginalFilename());
       String extension = StringUtils.getFilenameExtension(originalName);
+
+      // 3) Genere un nom unique pour eviter les collisions et ne pas exposer le nom fourni par l'utilisateur.
       String filename = UUID.randomUUID() + (extension == null ? "" : "." + extension);
       Path target = uploadDir.resolve(filename);
+
+      // 4) Copie le flux sur disque et renvoie l'URL publique servie via /uploads/**.
       Files.copy(file.getInputStream(), target);
       return baseUrl + "/uploads/" + filename;
     } catch (IOException ex) {

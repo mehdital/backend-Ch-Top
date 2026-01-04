@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
+/**
+ * Service métier pour la création de messages.
+ *
+ * <p>Valide l'existence du user et du rental, puis persiste un {@link Message}.
+ */
 public class MessageService {
   private final MessageRepository messageRepository;
   private final UserRepository userRepository;

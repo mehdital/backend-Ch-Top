@@ -16,6 +16,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "MESSAGES")
+/**
+ * Entité JPA représentant un message envoyé à propos d'une location.
+ *
+ * <p>Le message est rattaché à un {@link Rental} et à un {@link User}.
+ */
 public class Message {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

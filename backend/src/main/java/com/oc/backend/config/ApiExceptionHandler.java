@@ -10,10 +10,16 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestControllerAdvice
+/**
+ * Gestionnaire global d'exceptions pour retourner une réponse JSON cohérente.
+ *
+ * <p>Pour ce projet, on choisit de renvoyer un body JSON vide ({@code {}} / map vide)
+ * afin de coller au format attendu par le front / les tests d'intégration.
+ */
 public class ApiExceptionHandler {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Map<String, Object>> handleValidation(MethodArgumentNotValidException ex) {
-    // return empty JSON body on validation errors
+    // Retourne un JSON vide en cas d'erreur de validation
     return ResponseEntity.badRequest().body(Collections.emptyMap());
   }
 

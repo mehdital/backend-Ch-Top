@@ -16,6 +16,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
+/**
+ * Service métier d'authentification :
+ * <ul>
+ *   <li>Inscription : création du user, hash du mot de passe, retour d'un JWT</li>
+ *   <li>Connexion : vérification des identifiants, retour d'un JWT</li>
+ *   <li>"Me" : lecture des infos du user courant (via email du token)</li>
+ * </ul>
+ */
 public class AuthService {
   private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
   private final UserRepository userRepository;
@@ -39,7 +47,7 @@ public class AuthService {
     User user = new User();
     user.setName(request.name());
     user.setEmail(request.email());
-    // Hash before
+    // Hash du mot de passe avant sauvegarde
     user.setPassword(passwordEncoder.encode(request.password()));
 
     User saved = userRepository.save(user);

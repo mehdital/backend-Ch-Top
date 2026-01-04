@@ -5,6 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Payload reçu pour créer une location.
+ *
+ * <p>Reçu en {@code multipart/form-data} (cf. {@code picture}).
+ */
 public class RentalCreateRequest {
   @NotBlank
   private String name;

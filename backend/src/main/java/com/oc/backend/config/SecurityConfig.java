@@ -14,6 +14,16 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
+/**
+ * Configuration Spring Security de l'API.
+ *
+ * <p>Objectifs :
+ * <ul>
+ *   <li>API stateless (pas de session serveur)</li>
+ *   <li>Endpoints publics (login/register + Swagger + fichiers uploadés)</li>
+ *   <li>Protection du reste via un filtre JWT</li>
+ * </ul>
+ */
 public class SecurityConfig {
   private final JwtAuthenticationFilter jwtAuthenticationFilter;
 

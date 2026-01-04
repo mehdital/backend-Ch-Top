@@ -25,6 +25,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping("/rentals")
 @SecurityRequirement(name = "bearerAuth")
+/**
+ * Contrôleur des locations (rentals).
+ *
+ * <p>Gère :
+ * <ul>
+ *   <li>liste des rentals</li>
+ *   <li>détail d'un rental</li>
+ *   <li>création / mise à jour avec upload de photo (multipart/form-data)</li>
+ * </ul>
+ */
 public class RentalController {
   private final RentalService rentalService;
 
