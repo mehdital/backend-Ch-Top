@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
+/**
+ * Service métier utilisateur (lecture).
+ *
+ * <p>Expose un mapping simple de l'entité {@link User} vers {@link UserResponse}.
+ */
 public class UserService {
   private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy/MM/dd");
   private final UserRepository userRepository;

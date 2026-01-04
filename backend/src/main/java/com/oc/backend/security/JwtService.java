@@ -13,6 +13,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
+/**
+ * Service utilitaire pour émettre et valider des JWT.
+ *
+ * <p>Convention utilisée :
+ * <ul>
+ *   <li>Le {@code subject} contient l'email de l'utilisateur.</li>
+ *   <li>La validité est basée sur l'expiration (et la signature via la clé HMAC).</li>
+ * </ul>
+ */
 public class JwtService {
   private final Key key;
   private final long expirationMs;

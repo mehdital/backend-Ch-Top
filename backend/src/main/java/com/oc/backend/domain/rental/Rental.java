@@ -16,6 +16,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "RENTALS")
+/**
+ * Entité JPA représentant une location (rental).
+ *
+ * <p>Contient les informations principales (nom, surface, prix, description, photo)
+ * et le propriétaire ({@code owner}).
+ */
 public class Rental {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

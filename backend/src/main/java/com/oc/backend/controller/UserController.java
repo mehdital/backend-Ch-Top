@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 @SecurityRequirement(name = "bearerAuth")
+/**
+ * Contrôleur utilisateur.
+ *
+ * <p>Expose l'accès aux informations d'un utilisateur via son identifiant.
+ * JWT obligatoire (voir {@code @SecurityRequirement}).
+ */
 public class UserController {
   private final UserService userService;
 

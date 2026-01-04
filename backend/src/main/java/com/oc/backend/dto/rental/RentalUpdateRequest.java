@@ -5,6 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Payload reçu pour mettre à jour une location.
+ *
+ * <p>Reçu en {@code multipart/form-data}. Le champ {@code picture} est optionnel.
+ */
 public class RentalUpdateRequest {
   @NotBlank
   private String name;

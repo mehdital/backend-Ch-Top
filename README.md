@@ -53,3 +53,35 @@ https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#
 ### MySQL
 
 SQL script for creating the schema is available `ressources/sql/script.sql`
+
+## Back-end (Spring Boot)
+
+Prerequisites:
+- Java 17
+- MySQL running locally
+
+### Start the API
+
+Create the database + tables:
+
+> mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS rental_db;"
+>
+> Get-Content .\ressources\sql\script.sql \| mysql -u root -p rental_db
+
+Set environment variables (PowerShell, recommended):
+
+> $env:DB_USER="root"
+>
+> $env:DB_PASSWORD="your_password"
+>
+> $env:JWT_SECRET="change_me_change_me_change_me_change_me"  # >= 32 chars
+
+If you see `Error: connect ECONNREFUSED 127.0.0.1:3001` from the front-end proxy, the API is not running (or it crashed at startup). Start it from `.\backend` and check the console output (missing `JWT_SECRET`, MySQL not running, wrong DB credentials, etc.).
+
+Run the API (port `3001`, base path `/api`):
+
+> cd .\backend
+>
+> .\mvnw.cmd spring-boot:run
+
+

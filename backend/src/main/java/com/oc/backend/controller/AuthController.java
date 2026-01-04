@@ -23,6 +23,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/auth")
+/**
+ * Contrôleur d'authentification.
+ *
+ * <p>Endpoints :
+ * <ul>
+ *   <li>{@code POST /auth/register} : création de compte + retour d'un JWT</li>
+ *   <li>{@code POST /auth/login} : vérification des identifiants + retour d'un JWT</li>
+ *   <li>{@code GET /auth/me} : informations du user courant (JWT requis)</li>
+ * </ul>
+ */
 public class AuthController {
   private final AuthService authService;
 

@@ -8,8 +8,8 @@ spring:
     name: backend
   datasource:
     url: jdbc:mysql://localhost:3306/rental_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:}
   jpa:
     hibernate:
       ddl-auto: validate
@@ -17,6 +17,10 @@ spring:
 
 app:
   jwt:
-    secret: ${JWT_SECRET}
+    # Secret HMAC utilisé pour signer/valider les tokens (voir JwtService)
+    # NOTE: default uniquement pour développement local. En prod, fournir JWT_SECRET via variable d'environnement.
+    secret: ${JWT_SECRET:change_me_change_me_change_me_change_me}
+    # Durée de vie du token en millisecondes
     expiration-ms: 3600000
+  # Dossier local où sont stockées les images, exposé via /uploads/** (voir WebConfig)
   upload-dir: uploads
